@@ -21,9 +21,9 @@ import vues
 #Définitions
 
 #Affectations
-
+nom = "";
 if __name__ == '__main__':
 	print("<<<<<<<< Bonjour, veuillez nous communiquer votre nom svp! >>>>>>>>>\n")
-	nom = input("Taper votre nom ici :")
+	nom = input("Taper votre nom ici : ")
 
 	vues.bienvenue(nom)

@@ -27,6 +27,7 @@ import models
 import front_controleurs 
 import vues 
 import math
+import numpy as np
 
 #Définitions
 def methonde_rectangle(a, b, n, f, choix):
@@ -50,14 +51,22 @@ def methonde_rectangle(a, b, n, f, choix):
 	xi = []
 	yi = []
 
-	if choix == "G":
-		for x in range(a,b,h):
+	if choix == "0":
+		while a < n :
+			xi.append(a*h)
+			a = a + 1
+
+		for x in xi:
 			yi.append(eval(f))
 	else:
-		for x in range(a+h, b+h, h):
+		while a <= n :
+			xi.append(a*h)
+			a = a + 1
+
+		for x in xi[1:]:
 			yi.append(eval(f))
 
-	solution = eval(models.rectagles())
+	solution = eval(models.rectangle())
 
 	return vues.vue_rectangle(xi, yi, solution)
 

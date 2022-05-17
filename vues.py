@@ -16,33 +16,35 @@ Date de création
 17/Mai/2022 13:00
 """
 #Importation
-from numpy as np
-from matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.pyplot as plt
 import front_controleurs
-from pyAnalNum import nom
+from app import nom
 
 #Définitions
 def vue_rectangle(xi, yi, solution):
 	x = np.array(xi)
 	y = np.array(yi)
-
-	plt.plot(x, y, label="Val approximative de f dans xn - xi")
+	print(x)
+	print(y)
+	plt.plot(x, y)
 
 	plt.xlabel("Discretisation avec écart h")
 	plt.ylabel("Approximation de f")
-
-	plt.title("Proximation de l'intégrale par la méthode du Rectangle")
+	text = "La valeur approchée de l'intégrale est : {}". format(solution)
+	plt.title(text)
 	plt.legend()
 
 	plt.show()
 
 def bienvenue(nom):
+	nom = nom
 	print("""
 		--------------------------------------------------------------------------------
-		Bienvenue chez elmes
+		Bienvenue chez elmes {}
 		
 		Cette application console, va vous permettre de résoudre par les
-		méthodes dites numériques, les élements suivantes :
+		méthodes dites numériques, les élements suivants :
 		  1. Les intégrales simples
 		  2. Les équations différentielles
 		  3. Les problèmes de l'alagèbre linéaires
@@ -57,33 +59,31 @@ def bienvenue(nom):
 		Appuyez sur la touche (6) pour l'équation hyperbolique du 2d ordre
 		Appuyez sur la touche (7) pour résoudre les problèmes de l'algèbre linéaire
 		-------------------------------------------------------------------------------
-		""")
+		""".format(nom))
+
 	choix = input("\n\nVeuillez faire votre choix ici : ")
-	if eval(choix).is_integer() :
-		if eval(choix) == 0 OR eval(choix) == 1:
-			return data_rectangle()
- 	else
-		print("\n\nSVP Veuillez insérer une parmis les valeurs indiquées...\nAllez on recommence à partir de zero\n\n")
-		return bienvenue()
-
-def data_rectangle():
-	choix = bienvenue(nom)
-	if choix == 0 OR choix == 1 :
-		print("\n\nSi vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*math.pi/2 pour 270°")
-		intervalle = input("\n\nVeuillez enter l'intervale, de la manière suivante a;b : ")
-
-		a, b = intervalle.split(';')
-		a , b = eval(a), eval(b)
-
-		fonction = input("\n\nVeuillez entrer la fonction, avec x comme variable")
-
-		dicret = input("\n\nVeuillez entrer les nombres entier n de l'étendue : ")
-
-		n = eval(dicret)
-
-		return front_controleurs.rectangle(choix, a, b, fonction, n)
-	else :
+	
+	if choix == "0" or choix == "1":
+		return data_rectangle(choix)
+	else:
+		print("""
+			\n\nSVP Veuillez insérer une parmis les valeurs indiquées...\n
+			Allez on recommence à partir de zero\n\n""")
 		return bienvenue(nom)
 
+def data_rectangle(choix):
+	print("\n\nSi vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*math.pi/2 pour 270°")
+	intervalle = input("\n\nVeuillez enter l'intervale, de la manière suivante a;b : ")
+
+	a, b = intervalle.split(';')
+	a , b = int(a), int(b)
+
+	fonction = input("\n\nVeuillez entrer la fonction, avec x comme variable : ")
+
+	dicret = input("\n\nVeuillez entrer les nombres entier n de l'étendue : ")
+
+	n = eval(dicret)
+
+	return front_controleurs.rectangle(choix, a, b, fonction, n)
 
 #Affectations
