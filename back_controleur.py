@@ -26,6 +26,7 @@ Date de création
 from models import *
 from front_controleurs import *
 from vues import *
+import math
 
 #Définitions
 def methonde_rectagles(a, b, n, f, choix):
