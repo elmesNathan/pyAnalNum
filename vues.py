@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Ce fichier nommer vues permet d'intérargir avec l'utilisateur,
+Ce fichier nommer vues permet d'intérargir avec l'utilisateur.
+Il sait comment recupérer les données insérer par l'unitisateur
+et le envoie au front controleur adéquat.
 
 Auteur
 -------
@@ -17,6 +19,7 @@ Date de création
 from numpy as np
 from matplotlib.pyplot as plt
 import front_controleurs
+from pyAnalNum import nom
 
 #Définitions
 def vue_rectangle(xi, yi, solution):
@@ -33,7 +36,7 @@ def vue_rectangle(xi, yi, solution):
 
 	plt.show()
 
-def bienvenue():
+def bienvenue(nom):
 	print("""
 		--------------------------------------------------------------------------------
 		Bienvenue chez elmes
@@ -57,13 +60,14 @@ def bienvenue():
 		""")
 	choix = input("\n\nVeuillez faire votre choix ici : ")
 	if eval(choix).is_integer() :
-		return eval(choix)
-	else
+		if eval(choix) == 0 OR eval(choix) == 1:
+			return data_rectangle()
+ 	else
 		print("\n\nSVP Veuillez insérer une parmis les valeurs indiquées...\nAllez on recommence à partir de zero\n\n")
 		return bienvenue()
 
 def data_rectangle():
-	choix = bienvenue()
+	choix = bienvenue(nom)
 	if choix == 0 OR choix == 1 :
 		print("\n\nSi vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*math.pi/2 pour 270°")
 		intervalle = input("\n\nVeuillez enter l'intervale, de la manière suivante a;b : ")
@@ -79,9 +83,7 @@ def data_rectangle():
 
 		return front_controleurs.rectangle(choix, a, b, fonction, n)
 	else :
-		return bienvenue()
+		return bienvenue(nom)
 
 
-#Affectation
-
-#if __name__ == '__main__' :
+#Affectations

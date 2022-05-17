@@ -23,13 +23,13 @@ Date de création
 """
 
 #Importation
-from models import *
-from front_controleurs import *
-from vues import *
+import models 
+import front_controleurs 
+import vues 
 import math
 
 #Définitions
-def methonde_rectagles(a, b, n, f, choix):
+def methonde_rectangle(a, b, n, f, choix):
 	"""
 	Calcul de l'intégrale par la méthode du Rectagle
 	On définit h par :
@@ -57,12 +57,9 @@ def methonde_rectagles(a, b, n, f, choix):
 		for x in range(a+h, b+h, h):
 			yi.append(eval(f))
 
-	solution = eval(rectagles())
+	solution = eval(models.rectagles())
 
-	return vue_rectangle(xi, yi, solution)
+	return vues.vue_rectangle(xi, yi, solution)
 
 
-#Affectation
-
-#if __name__ == '__main__' :
-
+#Affectations

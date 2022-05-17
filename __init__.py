@@ -12,19 +12,18 @@ electromecatronique01@gmail.com
 
 Date de création
 -----------------
-17/Mai/2022 14:30
+17/Mai/2022 14:40
 """
 
 #Importation
-import back_controleurs
+import vues
 
 #Définitions
-def rectangle(choix, a, b, f, n):
-	"""
-	Cette fonction va appeler le controleur methode rectangle avec 
-	les paramètres provenants de la vues
-	"""
-	return back_controleurs.methonde_rectangle(a, b, n, f, choix)
-
 
 #Affectations
+
+if __name__ == '__main__':
+	print("<<<<<<<< Bonjour, veuillez nous communiquer votre nom svp! >>>>>>>>>\n")
+	nom = input("Taper votre nom ici :")
+
+	vues.bienvenue(nom)

@@ -22,6 +22,4 @@ Date de création
 def rectangle():
 	return "h*sum(yi)"
 
-#Affectation
-
-#if __name__ == '__main__' :
+#Affectations
