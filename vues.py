@@ -22,7 +22,7 @@ import front_controleurs
 from app import nom
 
 #Définitions
-def vue_rectangle(xi, yi, solution):
+def vue_rectangle(xi, yi, solution, nom=nom):
 	x = np.array(xi)
 	y = np.array(yi)
 	print(x)
@@ -36,6 +36,11 @@ def vue_rectangle(xi, yi, solution):
 	plt.legend()
 
 	plt.show()
+	continuer = input("Voulez vous reutiliser l'application.\nAppuyez sur 1 pour oui et toute autre touche pour non : > ")
+	if continuer == "1":
+		bienvenue(nom)
+	else:
+		print("Bye bye {}, Elmes est très ravis d'avoir travailler avec toi...".format(nom))
 
 def bienvenue(nom):
 	nom = nom
@@ -76,7 +81,7 @@ def data_rectangle(choix):
 	intervalle = input("\n\nVeuillez enter l'intervale, de la manière suivante a;b : ")
 
 	a, b = intervalle.split(';')
-	a , b = int(a), int(b)
+	a , b = eval(a), eval(b)
 
 	fonction = input("\n\nVeuillez entrer la fonction, avec x comme variable : ")
 

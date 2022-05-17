@@ -47,23 +47,24 @@ def methonde_rectangle(a, b, n, f, choix):
 	Et enfin, on détermine la valeur approchée en 
 	évaluant la formule de l'approximation par le rectangle.
 	"""
-	h = (b - a)/n
+	h = (b-a)/n
 	xi = []
 	yi = []
+	i = 0
 
 	if choix == "0":
-		while a < n :
-			xi.append(a*h)
-			a = a + 1
+		while i < n :
+			xi.append(a + i*h)
+			i = i + 1
 
 		for x in xi:
 			yi.append(eval(f))
 	else:
-		while a <= n :
-			xi.append(a*h)
-			a = a + 1
+		while i <= n :
+			xi.append(a+h + i*h)
+			i = i + 1
 
-		for x in xi[1:]:
+		for x in xi:
 			yi.append(eval(f))
 
 	solution = eval(models.rectangle())

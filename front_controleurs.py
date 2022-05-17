@@ -20,7 +20,6 @@ import back_controleurs
 
 #Définitions
 def rectangle(choix, a, b, f, n):
-	a, b, n = int(a), int(b), int(n)
 	"""
 	Cette fonction va appeler le controleur methode rectangle avec 
 	les paramètres provenants de la vues
