@@ -71,5 +71,37 @@ def methonde_rectangle(a, b, n, f, choix):
 
 	return vues.vue_rectangle(xi, yi, solution)
 
+def euler(a, b, n, f, y0):
+	"""
+	Calcul de l'intégrale par la méthode du Rectagle
+	On définit h par :
+		 b - a
+	h = -------
+	       n	
+	On trouve les abscices X par :
+	X = a + kh 
+
+	On trouve les ordonnées Y par :
+	Y = yk + hf(x_k,y_k)
+
+	Et enfin, on détermine la valeur approchée en 
+	évaluant la formule de l'approximation par le rectangle.
+	"""
+	h = (b-a)/n
+	xk = []
+	yk_1 = []
+	k = 0
+	y = y0
+
+	while k < n :
+		xk.append(a + i*h)
+		k = k + 1
+
+	for x in xk:
+		yk_1.append(y + h*eval(f))
+		y = yk_1
+
+	return vues.vue_euler(xk, yk_1, solution)
+
 
 #Affectations

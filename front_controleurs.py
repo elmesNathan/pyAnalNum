@@ -21,10 +21,16 @@ import back_controleurs
 #Définitions
 def rectangle(choix, a, b, f, n):
 	"""
-	Cette fonction va appeler le controleur methode rectangle avec 
-	les paramètres provenants de la vues
+	Cette fonction va appeler le controleur methode_rectangle avec 
+	les paramètres provenants de la vues 
+
 	"""
-	return back_controleurs.methonde_rectangle(a, b, n, f, choix)
+	return back_controleurs.methonde_rectangle(a, b, n, f, choix, )
 
-
+def euler(a, b, f, n, y0):
+	"""
+	Cette fonction va appeler le controleur euler avec les données en 
+	paramètres lesquels provenant de la vue euler
+	"""
+	return back_controleurs.euler(a, b, n, f, y0)
 #Affectations

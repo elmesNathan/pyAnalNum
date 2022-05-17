@@ -22,7 +22,7 @@ import front_controleurs
 from app import nom
 
 #Définitions
-def vue_rectangle(xi, yi, solution, nom=nom):
+def vue_rectangle(xi, yi, h, nom=nom):
 	x = np.array(xi)
 	y = np.array(yi)
 	print(x)
@@ -41,6 +41,27 @@ def vue_rectangle(xi, yi, solution, nom=nom):
 		bienvenue(nom)
 	else:
 		print("Bye bye {}, Elmes est très ravis d'avoir travailler avec toi...".format(nom))
+
+def vue_euler(xk, yk_1, nom=nom):
+	x = np.array(xk)
+	y = np.array(yk_1)
+	print(x)
+	print(y)
+	plt.plot(x, y)
+
+	plt.xlabel("Discretisation avec écart {}".format(h))
+	plt.ylabel("Approximation de f")
+	text = "La valeur approchée de l'intégrale est : {}". format(solution)
+	plt.title(text)
+	plt.legend()
+
+	plt.show()
+	continuer = input("Voulez vous reutiliser l'application.\nAppuyez sur 1 pour oui et toute autre touche pour non : > ")
+	if continuer == "1":
+		bienvenue(nom)
+	else:
+		print("Bye bye {}, Elmes est très ravis d'avoir travailler avec toi...".format(nom))
+
 
 def bienvenue(nom):
 	nom = nom
@@ -70,25 +91,43 @@ def bienvenue(nom):
 	
 	if choix == "0" or choix == "1":
 		return data_rectangle(choix)
+	elif choix == "1"
+		return data_euler(choix)
 	else:
 		print("""
 			\n\nSVP Veuillez insérer une parmis les valeurs indiquées...\n
 			Allez on recommence à partir de zero\n\n""")
 		return bienvenue(nom)
 
-def data_rectangle(choix):
-	print("\n\nSi vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*math.pi/2 pour 270°")
-	intervalle = input("\n\nVeuillez enter l'intervale, de la manière suivante a;b : ")
+def data_rectangle(choix, nom=nom):
+	print("\n\n{} Si vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*np.pi/2 pour 270°".format(nom))
+	intervalle = input("\n\n{}Veuillez enter l'intervale, de la manière suivante a;b : ".format(nom))
 
 	a, b = intervalle.split(';')
 	a , b = eval(a), eval(b)
 
-	fonction = input("\n\nVeuillez entrer la fonction, avec x comme variable : ")
+	fonction = input("\n\n{}Veuillez entrer la fonction, avec x comme variable : ".format(nom))
 
-	dicret = input("\n\nVeuillez entrer les nombres entier n de l'étendue : ")
+	discret = input("\n\n{}Veuillez entrer les nombres entier n de l'étendue : ".format(nom))
 
-	n = eval(dicret)
+	n = eval(discret)
 
 	return front_controleurs.rectangle(choix, a, b, fonction, n)
 
+def data_euler():
+	print("\n\n{}Si vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*np.pi/2 pour 270°".format(nom))
+	intervalle = input("\n\n{}, Veuillez enter l'intervale, de la manière suivante a;b : ".format(nom))
+
+	a, b = intervalle.split(';')
+	a , b = eval(a), eval(b)
+
+	fonction = input("\n\n{}, Veuillez entrer le second f(x,y(x)) : ".format(nom))
+
+	discret = input("\n\n{}, Veuillez entrer les nombres entier n de l'étendue : ".format(nom))
+
+	n = eval(discret)
+
+	y0 = input("\n\n{}, Veuiller entre la condition initian sous forme (x0,y0) : ".format(nom))
+
+	return front_controleurs.euler(a, b, fonction, n, y0)
 #Affectations
