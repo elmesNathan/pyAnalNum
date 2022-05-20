@@ -34,4 +34,11 @@ def euler(a, b, f, n, x0, y0):
 	"""
 	return back_controleurs.euler(a, b, n, f, x0, y0)
 
+
+def parabolique(ci, cl, fx, D, hx, ht):
+	"""
+	Cette fonction va appeler le controleur parabolique avec les données en
+	paramètres lesquels provenant de la vue euler
+	"""
+	return back_controleurs.parabolique(ci, cl, fx, D, hx, ht)
 #Affectations
