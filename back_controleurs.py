@@ -71,7 +71,7 @@ def methonde_rectangle(a, b, n, f, choix):
 
 	return vues.vue_rectangle(xi, yi, solution)
 
-def euler(a, b, n, f, y0):
+def euler(a, b, n, f, x0, y0):
 	"""
 	Calcul de l'intégrale par la méthode du Rectagle
 	On définit h par :
@@ -94,14 +94,14 @@ def euler(a, b, n, f, y0):
 	y = y0
 
 	while k < n :
-		xk.append(a + i*h)
+		xk.append(x0 + k*h)
 		k = k + 1
 
 	for x in xk:
 		yk_1.append(y + h*eval(f))
-		y = yk_1
+		y = yk_1[-1]
 
-	return vues.vue_euler(xk, yk_1, solution)
+	return vues.vue_euler(xk, yk_1, h)
 
 
 #Affectations

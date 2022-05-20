@@ -27,10 +27,11 @@ def rectangle(choix, a, b, f, n):
 	"""
 	return back_controleurs.methonde_rectangle(a, b, n, f, choix, )
 
-def euler(a, b, f, n, y0):
+def euler(a, b, f, n, x0, y0):
 	"""
 	Cette fonction va appeler le controleur euler avec les données en 
 	paramètres lesquels provenant de la vue euler
 	"""
-	return back_controleurs.euler(a, b, n, f, y0)
+	return back_controleurs.euler(a, b, n, f, x0, y0)
+
 #Affectations

@@ -22,7 +22,7 @@ import front_controleurs
 from app import nom
 
 #Définitions
-def vue_rectangle(xi, yi, h, nom=nom):
+def vue_rectangle(xi, yi, solution, nom=nom):
 	x = np.array(xi)
 	y = np.array(yi)
 	print(x)
@@ -42,25 +42,24 @@ def vue_rectangle(xi, yi, h, nom=nom):
 	else:
 		print("Bye bye {}, Elmes est très ravis d'avoir travailler avec toi...".format(nom))
 
-def vue_euler(xk, yk_1, nom=nom):
+def vue_euler(xk, yk_1, h):
 	x = np.array(xk)
 	y = np.array(yk_1)
 	print(x)
 	print(y)
 	plt.plot(x, y)
-
-	plt.xlabel("Discretisation avec écart {}".format(h))
-	plt.ylabel("Approximation de f")
-	text = "La valeur approchée de l'intégrale est : {}". format(solution)
+	text = "intervalle fixé à {}".format(h)
+	plt.xlabel(text)
+	plt.ylabel("Approximation de Y_k+1")
+	text = "La fonction approchée par la méthode d'Euler"
 	plt.title(text)
-	plt.legend()
 
 	plt.show()
 	continuer = input("Voulez vous reutiliser l'application.\nAppuyez sur 1 pour oui et toute autre touche pour non : > ")
 	if continuer == "1":
 		bienvenue(nom)
 	else:
-		print("Bye bye {}, Elmes est très ravis d'avoir travailler avec toi...".format(nom))
+		print("""Bye bye, Elmes est très ravis d'avoir travailler avec toi...""".format(nom))
 
 
 def bienvenue(nom):
@@ -79,20 +78,25 @@ def bienvenue(nom):
 		Appuyez sur la touche (0) pour l'intégrale avec la méthode du rectangle à gauche
 		Appuyez sur la touche (1) pour l'intégrale avec la méthode du rectangle à droite
 		Appuyez sur la touche (2) pour l'équation différentielle ordinaire du 1er ordre
-		Appuyez sur la touche (3) pour l'équation différentielle ordinaire du 2d ordre
-		Appuyez sur la touche (4) pour l'équation elliptique du 2d ordre
-		Appuyer sur la touche (5) pour l'équation parabolique du 2d ordre
-		Appuyez sur la touche (6) pour l'équation hyperbolique du 2d ordre
-		Appuyez sur la touche (7) pour résoudre les problèmes de l'algèbre linéaire
+		Appuyer sur la touche (3) pour l'équation parabolique du 2d ordre
 		-------------------------------------------------------------------------------
+		Pour quitter ce programme appuyer sur la touche q
 		""".format(nom))
 
 	choix = input("\n\nVeuillez faire votre choix ici : ")
 	
 	if choix == "0" or choix == "1":
 		return data_rectangle(choix)
-	elif choix == "1"
-		return data_euler(choix)
+
+	elif choix == "2":
+		return data_euler()
+
+	elif choix == "3":
+		return data_parabolique()
+
+	elif choix == "q" or choix == "Q":
+		return """.....  Bye  bye ..... \n\n\n"""
+
 	else:
 		print("""
 			\n\nSVP Veuillez insérer une parmis les valeurs indiquées...\n
@@ -100,34 +104,63 @@ def bienvenue(nom):
 		return bienvenue(nom)
 
 def data_rectangle(choix, nom=nom):
-	print("\n\n{} Si vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*np.pi/2 pour 270°".format(nom))
-	intervalle = input("\n\n{}Veuillez enter l'intervale, de la manière suivante a;b : ".format(nom))
+	print("\n\nSi vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*np.pi/2 pour 270°")
+	intervalle = input("\n\nVeuillez enter l'intervale, de la manière suivante a;b : """)
 
 	a, b = intervalle.split(';')
 	a , b = eval(a), eval(b)
 
-	fonction = input("\n\n{}Veuillez entrer la fonction, avec x comme variable : ".format(nom))
+	fonction = input("\n\nVeuillez entrer la fonction, avec x comme variable : ")
 
-	discret = input("\n\n{}Veuillez entrer les nombres entier n de l'étendue : ".format(nom))
+	discret = input("\n\nVeuillez entrer les nombres entier n de l'étendue : ")
 
 	n = eval(discret)
 
 	return front_controleurs.rectangle(choix, a, b, fonction, n)
 
 def data_euler():
-	print("\n\n{}Si vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*np.pi/2 pour 270°".format(nom))
-	intervalle = input("\n\n{}, Veuillez enter l'intervale, de la manière suivante a;b : ".format(nom))
+	print("\n\nSi vous utiliserer des fonctions trigonométriques, insérer les angles en radiant ex. 3*np.pi/2 pour 270°")
+	intervalle = input("\n\nVeuillez enter l'intervale, de la manière suivante a;b : """)
 
 	a, b = intervalle.split(';')
 	a , b = eval(a), eval(b)
 
-	fonction = input("\n\n{}, Veuillez entrer le second f(x,y(x)) : ".format(nom))
+	fonction = input("\n\nVeuillez entrer le second f(x,y(x)) : ")
 
-	discret = input("\n\n{}, Veuillez entrer les nombres entier n de l'étendue : ".format(nom))
+	discret = input("\n\nVeuillez entrer les nombres entier n de l'étendue : ")
 
 	n = eval(discret)
 
-	y0 = input("\n\n{}, Veuiller entre la condition initian sous forme (x0,y0) : ".format(nom))
+	ci = input("\n\nVeuiller entre la condition initian sous forme x0;y0 : ")
+	
+	x0, y0 = ci.split(';')
 
-	return front_controleurs.euler(a, b, fonction, n, y0)
-#Affectations
+	x0 = float(x0)
+	y0 = float(y0)
+
+	return front_controleurs.euler(a, b, fonction, n, x0, y0)
+
+def data_parabolique():
+	print("\nQuelles sont les conditions aux initiales [ti,tf] ? \n")
+	val = input("Entrez les valeurs de cette manière ti;tf --> ")
+	ti, tf = val.split(';')
+	ci = [eval(ti), eval(tf)]
+
+	print("\nQuelles sont les conditions limites [a,b]? \n")
+	val = input("Entrez les valeurs de cette manière a;b --> ")
+	a, b = val.split(';')
+	cl = [eval(a), eval(b)]
+
+	print("\nQuelle est le matériaux utiliser (conductivité) ?\n")
+	val = input("Entrez la valeur numérique ici --> ")
+	D = eval(val)
+
+	print("\nQuelle est la valeur de l'espacement (hx) ?\n")
+	val = input("Entrez la numérique ici --> ")
+	hx = eval(val)
+
+	print("\nQuelle est le comportement du matériaux\n")
+	val = input("Entrer la fonction en ici --> ")
+	fx = val
+
+	return front_controleurs.parabolique(ci, cl, fx, D, hx, ht)
